@@ -1,0 +1,8 @@
+{
+  "name": "fivemesports-id",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Global FiveM server analytics dashboard using public Cfx.re server listings",
+  "dependencies": { "@neondatabase/serverless": "^1.0.1" },
+  "engines": { "node": ">=20" }
+}

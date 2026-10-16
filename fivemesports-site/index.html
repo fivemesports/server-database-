@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090b10"><meta name="description" content="FIVEM ESPORTS — pemantauan server FiveM global, peta dunia, statistik pemain, dan leaderboard. Data server publik bersumber dari Cfx.re.">
+  <title>fivemesports.id — Global FiveM Server Intelligence</title>
+  <link rel="icon" href="/assets/logo.png"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#overview"><img src="/assets/logo.png" alt="FIVEM ESPORTS logo"><span><b>FIVEM</b><strong>ESPORTS</strong><small>GLOBAL SERVER INTELLIGENCE</small></span></a>
+      <button class="mobile-menu" id="menuToggle" aria-label="Buka navigasi">☰</button>
+      <nav id="mainNav"><a class="active" href="#overview">Dashboard</a><a href="#world">World Map</a><a href="#servers">Server Global</a><a href="#rankings">Top 10</a><a href="#history">30 Hari</a><a href="#about">Tentang</a></nav>
+      <div class="top-actions"><span class="live-state"><i></i><span id="liveLabel">Menghubungkan</span></span><button id="refreshBtn" class="icon-button" title="Perbarui data">↻</button><span class="updated" id="updatedAt">Menunggu data Cfx.re</span></div>
+    </header>
+
+    <main>
+      <section class="hero" id="overview">
+        <video class="hero-video" autoplay muted loop playsinline poster="/assets/reference-dashboard.jpg"><source src="/assets/dashboard-banner.mp4" type="video/mp4"></video><div class="hero-shade"></div>
+        <div class="hero-content"><div class="eyebrow"><span class="red-dot"></span> GLOBAL FIVE M SERVER NETWORK</div><h1>THE WORLD OF FIVE M.<br><em>LIVE, IN ONE PLACE.</em></h1><p>Jelajahi server roleplay dari seluruh dunia. Pantau aktivitas pemain, temukan komunitas, dan bandingkan performa server dari satu dashboard.</p><div class="hero-buttons"><a class="btn primary" href="#world">Jelajahi World Map <span>↗</span></a><a class="btn secondary" href="#servers">Lihat Semua Server</a></div><div class="hero-foot"><span><i class="green-dot"></i> Sumber: daftar publik Cfx.re</span><span>Refresh otomatis setiap 5 menit</span></div></div>
+        <div class="hero-mark">FIVEM<br><b>ESPORTS</b><span>SERVER INTELLIGENCE</span></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Statistik global">
+        <article class="stat-card"><div class="stat-top"><span>Total Server</span><span class="stat-icon" data-icon="server"></span></div><strong id="totalServers">—</strong><small><i class="green-dot"></i> Server dari listing publik</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Pemain Online</span><span class="stat-icon" data-icon="users"></span></div><strong id="totalPlayers">—</strong><small><i class="green-dot"></i> Total pemain terdeteksi</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Kapasitas Global</span><span class="stat-icon" data-icon="capacity"></span></div><strong id="totalCapacity">—</strong><small>Slot dari server yang terindeks</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Negara Terdeteksi</span><span class="stat-icon" data-icon="globe"></span></div><strong id="totalCountries">—</strong><small>Estimasi dari metadata server</small></article>
+      </section>
+
+      <section class="section map-section" id="world"><div class="section-heading"><div><div class="eyebrow">REAL-TIME OVERVIEW</div><h2>Global Server <em>World Map</em></h2><p>Jelajahi server dan aktivitas komunitas di peta dunia.</p></div><div class="map-legend"><span><i class="legend-dot green"></i> Online</span><span><i class="legend-dot amber"></i> Beban tinggi</span><span><i class="legend-dot red"></i> Penuh / hampir penuh</span></div></div>
+        <div class="map-layout"><aside class="map-side"><div class="mini-stat"><span class="mini-icon">⌁</span><div><small>Live Players (Global)</small><b id="mapPlayers">—</b></div><span class="live-pill">LIVE</span></div><div class="side-title">TOP NEGARA</div><div id="countryLeaders" class="country-leaders"><div class="loading-line"></div><div class="loading-line"></div><div class="loading-line"></div></div><div class="map-note"><b>Catatan lokasi</b><p>Lokasi negara diperkirakan dari metadata publik server bila tersedia. Ini bukan verifikasi lokasi fisik hosting.</p></div></aside><div class="map-wrap"><div id="worldMap" role="application" aria-label="Peta server FiveM global"></div><div class="map-overlay"><span class="live-pulse"></span><span id="mapStatus">Menyiapkan peta</span></div><div class="map-controls"><button id="zoomIn" aria-label="Perbesar peta">+</button><button id="zoomOut" aria-label="Perkecil peta">−</button></div></div></div>
+      </section>
+
+      <section class="section" id="rankings"><div class="section-heading"><div><div class="eyebrow">COMMUNITY LEADERBOARD</div><h2>Server <em>Teratas</em></h2><p>Ranking dihitung dari jumlah pemain online yang sedang terdeteksi.</p></div><div class="segmented" id="rankTabs"><button class="selected" data-rank="global">Global</button><button data-rank="Indonesia">Indonesia</button><button data-rank="United States">USA</button><button data-rank="Brazil">Brazil</button></div></div>
+        <div class="rank-layout"><div class="panel rank-panel"><div class="panel-head"><div><h3>Top 10 Server</h3><span id="rankSubtitle">Pemain online terbanyak saat ini</span></div><span class="panel-tag">LIVE RANK</span></div><div class="table-scroll"><table><thead><tr><th>#</th><th>Server</th><th>Negara</th><th>Pemain</th><th>Kapasitas</th><th>Isi</th></tr></thead><tbody id="rankTable"><tr><td colspan="6" class="empty-state">Mengambil data server dari Cfx.re…</td></tr></tbody></table></div></div><div class="panel activity-panel"><div class="panel-head"><div><h3>Server Activity</h3><span>Perbandingan pemain Top 5</span></div><span class="panel-tag red-tag">TOP 5</span></div><div id="activityBars" class="activity-bars"><div class="loading-line"></div><div class="loading-line"></div></div><div class="activity-foot"><span class="legend-dot red"></span> Pemain online terdeteksi</div></div></div>
+      </section>
+
+      <section class="section" id="servers"><div class="section-heading"><div><div class="eyebrow">LIVE SERVER DIRECTORY</div><h2>Server <em>Seluruh Dunia</em></h2><p>Telusuri listing publik yang berhasil diambil otomatis.</p></div><div class="directory-count"><b id="visibleCount">0</b><span>hasil ditampilkan</span></div></div>
+        <div class="filters"><label class="search-box"><span>⌕</span><input id="serverSearch" type="search" placeholder="Cari nama server, negara, atau tag…"></label><select id="countryFilter" aria-label="Filter negara"><option value="all">Semua negara</option></select><select id="sortFilter" aria-label="Urutkan server"><option value="players">Pemain terbanyak</option><option value="name">Nama A–Z</option><option value="capacity">Kapasitas terbesar</option></select></div>
+        <div class="panel directory-panel"><div class="table-scroll"><table><thead><tr><th>Server</th><th>Negara</th><th>Status</th><th>Pemain</th><th>Kapasitas</th><th>Aktivitas</th><th></th></tr></thead><tbody id="serverTable"><tr><td colspan="7" class="empty-state">Memuat daftar server…</td></tr></tbody></table></div><div class="pagination"><span id="pageInfo">Menunggu data</span><div><button id="prevPage" disabled>← Sebelumnya</button><button id="nextPage" disabled>Berikutnya →</button></div></div></div>
+      </section>
+
+      <section class="section history-section" id="history"><div class="section-heading"><div><div class="eyebrow">HISTORICAL PERFORMANCE</div><h2>Statistik <em>30 Hari</em></h2><p>Performa jangka panjang dari snapshot yang tersimpan.</p></div><span class="panel-tag">30-DAY TRACKING</span></div><div class="history-grid"><div class="panel history-chart-panel"><div class="panel-head"><div><h3>Riwayat Pemain Global</h3><span id="historyStatus">Menunggu database riwayat</span></div><span class="chart-range">30 HARI</span></div><canvas id="historyChart" height="210" aria-label="Grafik riwayat pemain 30 hari"></canvas><div class="chart-axis"><span>30 hari lalu</span><span>Sekarang</span></div></div><div class="panel history-leaders"><div class="panel-head"><div><h3>Top Server 30 Hari</h3><span>Rekor pemain tertinggi yang tersimpan</span></div></div><div id="historyLeaders"><div class="empty-state">Riwayat akan muncul setelah database terhubung dan snapshot mulai dikumpulkan.</div></div></div></div><div class="notice"><span>ⓘ</span><p><b>Transparansi data:</b> data 30 hari tidak bisa direkonstruksi secara akurat dari listing saat ini. Ranking historis mulai terbentuk sejak pengumpulan snapshot diaktifkan. Server yang baru ditemukan mungkin belum memiliki riwayat penuh 30 hari.</p></div></section>
+
+      <section class="section country-section"><div class="section-heading"><div><div class="eyebrow">COUNTRY LEADERBOARD</div><h2>Top 3 <em>Setiap Negara</em></h2><p>Pilih negara untuk melihat server dengan pemain online terbanyak.</p></div><select id="countryTopFilter" aria-label="Pilih negara untuk Top 3"><option value="Indonesia">Indonesia</option></select></div><div id="countryTopCards" class="top3-grid"><div class="panel empty-state">Data negara akan tampil setelah listing berhasil dimuat.</div></div></section>
+
+      <section class="section about-section" id="about"><div class="about-copy"><div class="eyebrow">BUILT FOR THE COMMUNITY</div><h2>One network.<br><em>Every community.</em></h2><p>fivemesports.id adalah dashboard independen untuk eksplorasi komunitas FiveM, membantu pemain menemukan server dan memantau aktivitas secara lebih terbuka.</p></div><div class="about-points"><div><span>01</span><b>Auto discovery</b><p>Server dimuat dari listing publik Cfx.re, tanpa input ID manual.</p></div><div><span>02</span><b>Global perspective</b><p>Ranking, pencarian, peta, dan filter negara dalam satu tampilan.</p></div><div><span>03</span><b>Historical insights</b><p>Snapshot berkala untuk membangun analitik 30 hari.</p></div></div></section>
+    </main>
+    <footer><a class="footer-brand" href="#overview"><img src="/assets/logo.png" alt=""><b>FIVEM <em>ESPORTS</em></b></a><span>Independent community dashboard · Not affiliated with Cfx.re or Rockstar Games.</span><span>© <span id="year"></span> fivemesports.id</span></footer>
+  </div>
+  <div id="serverModal" class="modal" hidden><div class="modal-backdrop" data-close="1"></div><div class="modal-card"><button class="modal-close" data-close="1" aria-label="Tutup">×</button><div id="modalContent"></div></div></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="/app.js"></script>
+</body></html>
